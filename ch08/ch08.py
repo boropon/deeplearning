@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sun Aug 20 01:44:25 2017
+Created on Sun Aug 20 13:57:45 2017
 
 @author: tm
 """
@@ -11,8 +11,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from dataset.mnist import load_mnist
-from my_convnet import SimpleConvNet
 from common.trainer import Trainer
+from my_deep_convnet import DeepConvNet
 
 from PIL import Image
 
@@ -20,9 +20,14 @@ from PIL import Image
 #x_train, t_train = x_train[:5000], t_train[:5000]
 #x_test, t_test = x_test[:1000], t_test[:1000]
 
-network = SimpleConvNet(input_dim=(1,28,28), 
-                        conv_param = {'filter_num': 30, 'filter_size': 5, 'pad': 0, 'stride': 1},
-                        hidden_size=100, output_size=10, weight_init_std=0.01)
+network = DeepConvNet(input_dim=(1,28,28), 
+                        conv_param_1 = {'filter_num':16, 'filter_size':3, 'pad':1, 'stride':1},
+                        conv_param_2 = {'filter_num':16, 'filter_size':3, 'pad':1, 'stride':1},
+                        conv_param_3 = {'filter_num':32, 'filter_size':3, 'pad':1, 'stride':1},
+                        conv_param_4 = {'filter_num':32, 'filter_size':3, 'pad':2, 'stride':1},
+                        conv_param_5 = {'filter_num':64, 'filter_size':3, 'pad':1, 'stride':1},
+                        conv_param_6 = {'filter_num':64, 'filter_size':3, 'pad':1, 'stride':1},
+                        hidden_size=100, output_size=10)
 
 #################################
 # 学習処理                        
@@ -50,12 +55,12 @@ network = SimpleConvNet(input_dim=(1,28,28),
 # 認識処理                        
 #################################
 # 学習済みパラメータのロード
-network.load_params("my_ch07_params.pkl")
+network.load_params("my_deep_convnet_params.pkl")
 
 for i in range(0,10):
     filename = str(i) + '_np.png'
     np_img = np.asarray(Image.open(filename)).reshape(1,1,28,28) / 255.0
-
+    
     predict = network.predict(np_img)
     print(predict)
     answer = np.argmax(predict)

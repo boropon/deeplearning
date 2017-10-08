@@ -43,7 +43,6 @@ class Network(object):
         """
         for train_batch in I.SerialIterator(self.train_data, batchsize, repeat=False):
             x, t = self.conv(train_batch, batchsize)
-
             self.model.zerograds()
             loss = self.model(x, t)
             loss.backward()

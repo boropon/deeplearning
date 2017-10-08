@@ -13,7 +13,7 @@ from network import Network
 # load MNIST dataset
 TRAIN, TEST = chainer.datasets.get_mnist(ndim=3)
 
-MODEL = L.Classifier(CnnModel())
+MODEL = L.Classifier(AffineModel())
 OPTIMIZER = optimizers.MomentumSGD(lr=0.01, momentum=0.9)
 OPTIMIZER.setup(MODEL)
 

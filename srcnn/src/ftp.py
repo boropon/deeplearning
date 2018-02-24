@@ -1,18 +1,31 @@
 #!/usr/bin/python3
 
+import sys
 from ftplib import FTP
 
-def main():
-
-    ip = '10.247.83.78'
+def ftp_put(ip, filename):
+    #FTP login
     _ftp = FTP(ip)
     _ftp.login()
-    
-    filename = 'mmr.tif'
+
+    #ファイルオープン
     _file = open(filename, 'rb')
-    _ftp.storbinary("STOR " + filename + ' ,filetype=mediaprinttiff', _file)
+
+    #FTP put
+    _ftp.storbinary("STOR " + filename, _file)
+
+    #ファイルクローズ
     _file.close()
+
+    #FTP quit
     _ftp.quit()
 
+def send_to_mptiff(ip, filename)
+    #スーパーオプション filetype=mediaprinttiff指定付きでFTP putを行う
+    ftp_put(ip, filename + ' ,filetype=mediaprinttiff')
+
 if __name__ == '__main__':
-    main()
+    args = sys.argv
+    ip = argv[1]
+    filename = argv[2]
+    send_to_mptiff(ip, filename)

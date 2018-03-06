@@ -2,5 +2,5 @@
 *.vscode
 *.swp
 *.__pycache__
-checkpoint
 result
+resized_image.jpg

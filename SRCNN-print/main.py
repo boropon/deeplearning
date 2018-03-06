@@ -98,4 +98,4 @@ if __name__ == '__main__':
     ftp.send_to_mptiff(ip, "result/result.jpg", "tray=tray1,printscaling=fit")
 
     # 超解像処理をかける前のファイルをプリンタへ送信(比較用)
-    #ftp.send_to_mptiff(ip, "resized_image.jpg", "tray=tray1,printscaling=fit")
+    ftp.send_to_mptiff(ip, "resized_image.jpg", "tray=tray1,printscaling=fit")
